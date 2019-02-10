@@ -1,4 +1,4 @@
-package com.currency.conversion.challengebravo;
+package com.currency.conversion;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
