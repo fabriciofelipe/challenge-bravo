@@ -1,11 +1,10 @@
 package com.currency.conversion.service;
 
-import com.currency.conversion.client.CurrencyLayerClient;
 import com.currency.conversion.model.ConversionRequest;
 import com.currency.conversion.model.ConversionResponse;
 import com.currency.conversion.model.CurrencyLayer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,45 +13,39 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CurrencyLayerService {
 
     private final static String QUOTE_KEY = "USD";
+    private final CurrencyLayerServiceCache currencyLayerServiceCache;
 
-    private final CurrencyLayerClient currencyLayerClient;
-
-    @Value("${integration.access_key}")
-    private String accessKey;
-
-    public Optional<ConversionResponse> currencyLayer(ConversionRequest conversionRequest){
-        Optional<BigDecimal> fromQuote =  currencyLayerFindAll()
-            .map(fromValue -> fromValue.getQuotes().get(QUOTE_KEY.concat(conversionRequest.getFrom())));
-
-        Optional<BigDecimal> toQuote =  currencyLayerFindAll()
-            .map(fromValue -> fromValue.getQuotes().get(QUOTE_KEY.concat(conversionRequest.getTo())));
-
-        return currencyConversion(createdResponse(conversionRequest, fromQuote, toQuote));
+    public Optional<ConversionResponse> currencyLayer(Optional<ConversionRequest> conversionRequest){
+       return conversionRequest.flatMap(this::parse);
     }
 
-    private Optional<CurrencyLayer> currencyLayerFindAll() {
-        return currencyLayerClient.currencyLayerFindAll(accessKey);
+    private Optional<ConversionResponse> parse(ConversionRequest conversionRequest) {
+        CurrencyLayer currencyLayer = currencyLayerServiceCache.currencyLayerFindAll();
+        return currencyConversion(createdResponse(conversionRequest, currencyLayer));
     }
 
-    private ConversionResponse createdResponse(ConversionRequest conversionRequest, Optional<BigDecimal> fromQuote, Optional<BigDecimal> toQuote) {
+
+    private ConversionResponse createdResponse(ConversionRequest conversionRequest, CurrencyLayer currencyLayer) {
+        BigDecimal fromQuote = currencyLayer.getQuotes().get(QUOTE_KEY.concat(conversionRequest.getFrom()));
+        BigDecimal toQuote = currencyLayer.getQuotes().get(QUOTE_KEY.concat(conversionRequest.getTo()));
+
         return ConversionResponse
             .builder()
-            .fromValue(fromQuote)
-            .toValue(toQuote)
-            .amount(Optional.of(conversionRequest.getAmount()))
+            .source(currencyLayer.getSource())
+            .timestamp(currencyLayer.getTimestamp())
+            .fromQuote(fromQuote)
+            .toQuote(toQuote)
+            .amount(conversionRequest.getAmount())
             .build();
     }
 
-
     private Optional<ConversionResponse> currencyConversion(ConversionResponse conversionResponse){
-        BigDecimal fromValue = conversionResponse.getFromValue().get();
-        BigDecimal toValue = conversionResponse.getToValue().get();
-        BigDecimal amount = conversionResponse.getAmount().get();
-        BigDecimal rate = divide(fromValue,toValue);
-        conversionResponse.setConvertedValue(Optional.of(divide(amount, rate)));
+        BigDecimal rate = divide(conversionResponse.getFromQuote(),conversionResponse.getToQuote());
+        conversionResponse.setConvertedValue(divide(conversionResponse.getAmount(), rate));
         return Optional.of(conversionResponse);
     }
 

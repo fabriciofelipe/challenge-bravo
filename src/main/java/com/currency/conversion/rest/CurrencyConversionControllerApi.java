@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -27,12 +28,12 @@ public class CurrencyConversionControllerApi {
         @RequestParam("to") String to,
         @RequestParam("amount") BigDecimal amount) {
 
-        ConversionRequest conversionRequest = ConversionRequest
+        Optional<ConversionRequest> conversionRequest = Optional.of(ConversionRequest
             .builder()
             .from(from)
             .to(to)
             .amount(amount)
-            .build();
+            .build());
 
         return currencyLayerService.currencyLayer(conversionRequest)
             .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());

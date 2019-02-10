@@ -15,8 +15,10 @@ import java.util.Optional;
 @Data
 public class ConversionResponse {
 
-    private Optional<BigDecimal> fromValue;
-    private Optional<BigDecimal>  toValue;
-    private Optional<BigDecimal>  amount;
-    private Optional<BigDecimal>  convertedValue;
+    private BigDecimal fromQuote;
+    private BigDecimal toQuote;
+    private BigDecimal  amount;
+    private BigDecimal  convertedValue;
+    private String source;
+    private String timestamp;
 }

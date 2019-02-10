@@ -2,3 +2,7 @@ integration:
    clapi:
      base_url: http://www.apilayer.net
    access_key: 7848d869b483f1148c6adcaf88cd02c7
+
+
+spring.cache.cache-names: currencyLayer
+spring.cache.caffeine.spec: maximumSize=1,expireAfterAccess=60s
