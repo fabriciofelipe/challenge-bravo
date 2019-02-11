@@ -16,16 +16,16 @@ import java.util.Optional;
 @Slf4j
 public class CurrencyLayerService {
 
-    private final static String QUOTE_KEY = "USD";
+    public static final String QUOTE_KEY = "USD";
     private final CurrencyLayerServiceCache currencyLayerServiceCache;
 
-    public Optional<ConversionResponse> currencyLayer(Optional<ConversionRequest> conversionRequest){
-       return conversionRequest.flatMap(this::parse);
+    public Optional<ConversionResponse> currencyLayer(Optional<ConversionRequest> conversionRequest) {
+        return conversionRequest.flatMap(this::parse);
     }
 
     private Optional<ConversionResponse> parse(ConversionRequest conversionRequest) {
-        Optional<CurrencyLayer> currencyLayer = Optional.ofNullable(currencyLayerServiceCache.currencyLayerFindAll());
-        return currencyLayer.flatMap(cl-> currencyConversion(createdResponse(conversionRequest, cl)));
+        return currencyLayerServiceCache.currencyLayerFindAll()
+            .flatMap(cl -> currencyConversion(createdResponse(conversionRequest, cl)));
     }
 
 
@@ -43,13 +43,13 @@ public class CurrencyLayerService {
             .build();
     }
 
-    private Optional<ConversionResponse> currencyConversion(ConversionResponse conversionResponse){
-        BigDecimal rate = divide(conversionResponse.getFromQuote(),conversionResponse.getToQuote());
+    private Optional<ConversionResponse> currencyConversion(ConversionResponse conversionResponse) {
+        BigDecimal rate = divide(conversionResponse.getFromQuote(), conversionResponse.getToQuote());
         conversionResponse.setConvertedValue(divide(conversionResponse.getAmount(), rate));
         return Optional.of(conversionResponse);
     }
 
-    private BigDecimal divide(BigDecimal v1 , BigDecimal v2){
-       return v1.divide(v2,9, RoundingMode.HALF_UP);
+    private BigDecimal divide(BigDecimal v1, BigDecimal v2) {
+        return v1.divide(v2, 9, RoundingMode.HALF_UP);
     }
 }

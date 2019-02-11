@@ -10,16 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,7 +56,7 @@ public class CurrencyLayerServiceTest {
         quotes.put("USDBRL", new BigDecimal("3.7398"));
         quotes.put("USDUSD", BigDecimal.ONE);
 
-        CurrencyLayer currencyLayer = CurrencyLayer.builder().source("USD").timestamp("1549896845").quotes(quotes).build();
+        Optional<CurrencyLayer> currencyLayer = Optional.of(CurrencyLayer.builder().source("USD").timestamp("1549896845").quotes(quotes).build());
 
         //when
         when(currencyLayerClient.currencyLayerFindAll(any())).thenReturn(currencyLayer);

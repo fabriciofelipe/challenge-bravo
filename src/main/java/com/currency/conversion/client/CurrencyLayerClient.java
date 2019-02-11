@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface CurrencyLayerClient {
 
     @GetMapping(value = "/api/live")
-    CurrencyLayer currencyLayerFindAll(@RequestParam("access_key") String access_key);
+    Optional<CurrencyLayer> currencyLayerFindAll(@RequestParam("access_key") String accessKey);
 }

@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,7 +48,7 @@ public class CurrencyConversionControllerApiTest {
         quotes.put("USDBRL", new BigDecimal("3.7398"));
         quotes.put("USDUSD", BigDecimal.ONE);
 
-        CurrencyLayer currencyLayer = CurrencyLayer.builder().source("USD").timestamp("1549896845").quotes(quotes).build();
+        Optional<CurrencyLayer> currencyLayer = Optional.of(CurrencyLayer.builder().source("USD").timestamp("1549896845").quotes(quotes).build());
 
         //when
         when(currencyLayerServiceCache.currencyLayerFindAll()).thenReturn(currencyLayer);
@@ -65,7 +66,7 @@ public class CurrencyConversionControllerApiTest {
 
 
         //when
-        when(currencyLayerServiceCache.currencyLayerFindAll()).thenReturn(null);
+        when(currencyLayerServiceCache.currencyLayerFindAll()).thenReturn(Optional.empty());
 
         this.mockMvc.perform(get("/currencyConversion")
             .param("from", "BRL")

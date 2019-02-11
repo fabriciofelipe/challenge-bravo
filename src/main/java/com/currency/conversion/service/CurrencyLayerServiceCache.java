@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -20,7 +22,7 @@ public class CurrencyLayerServiceCache {
     private String accessKey;
 
     @Cacheable("currencyLayer")
-    public CurrencyLayer currencyLayerFindAll() {
+    public Optional<CurrencyLayer> currencyLayerFindAll() {
         log.info("findAll currency layer");
         return currencyLayerClient.currencyLayerFindAll(accessKey);
     }

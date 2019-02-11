@@ -5,4 +5,4 @@ integration:
 
 
 spring.cache.cache-names: currencyLayer
-spring.cache.caffeine.spec: maximumSize=1,expireAfterAccess=60s
+spring.cache.caffeine.spec: maximumSize=1,expireAfterAccess=5s
