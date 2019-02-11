@@ -24,8 +24,8 @@ public class CurrencyLayerService {
     }
 
     private Optional<ConversionResponse> parse(ConversionRequest conversionRequest) {
-        CurrencyLayer currencyLayer = currencyLayerServiceCache.currencyLayerFindAll();
-        return currencyConversion(createdResponse(conversionRequest, currencyLayer));
+        Optional<CurrencyLayer> currencyLayer = Optional.ofNullable(currencyLayerServiceCache.currencyLayerFindAll());
+        return currencyLayer.flatMap(cl-> currencyConversion(createdResponse(conversionRequest, cl)));
     }
 
 
