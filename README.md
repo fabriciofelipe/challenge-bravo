@@ -71,7 +71,7 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 
 ## Arquitetura
 <p align="center">
-  <img src="architecture.png" alt="Architecture" />
+  <img src="src/main/resources/static/architecture.png" alt="Architecture" />
 </p>
 
 ### Worker:
