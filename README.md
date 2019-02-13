@@ -59,3 +59,39 @@ Boa sorte e boa viagem! ;)
 <p align="center">
   <img src="ca.jpg" alt="Challange accepted" />
 </p>
+
+
+# Resposta ao Desafio Bravo
+Foi construída 1 API, respondesndo em JSON. A api foi feita em **java** com spring boot, openFeign no netflixOss para integraço com a api externa de cotação, spring chache e caffeine para gerenciamento do cache.
+Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que é capaz de buscar cotações atuais com lastro em USD entre diversas moedas e à partir de fontes sendo realizado um cache que é atualizado a cada 5s, podendo ser extendido. 
+
+
+## Fontes de cotação on-line
+  - https://apilayer.com/
+
+## Arquitetura
+<p align="center">
+  <img src="architecture.png" alt="Architecture" />
+</p>
+
+### Worker:
+- é realizado um cache da api que retorn as cotações.
+- Resposável por manter as cotações sempre atualizadas.
+- Permite diminuir o tempo de resposta da API já que não necessitará consultar a atualização na internet.
+
+
+### API:
+- A api foi contruída em Java 9 já contenplando os recursos da programação funcional,Lombok para deixa o java menos verboso, spring boot 2, spring cacheble, caffeine para gerenciamento de cache,openFeign netflix oss, mockito e Junit para testes, maven como gerenciador de dependencias e Docker
+- Responde aos requests http de converções dos usuários e processa as requisições entregando o resultado da cotação processada no formato **JSON**.
+
+
+## EXECUTANDO
+
+
+## TESTES de carga
+- Para os testes de performance utilizei a integração do framework gatling escrevendo em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
+- Atendeu mais de 5mil requisições por segundo
+
+### backLog
+- Criar uma estrutura de fallback(podemos usar a arquitetura da netflixOSS), para buscar cotação em outras fontes.
+
