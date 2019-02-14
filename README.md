@@ -97,10 +97,9 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 **docker run -p 8080:8080 --name challenge-bravo  challenge-bravo**
 
 - Api Ex: \
-
 **http://localhost:8080/currencyConversion?from=BRL&to=USD&amount=123.45**
-- CURL \
 
+- Request \
 **curl -X GET \
   'http://localhost:8080/currencyConversion?from=BRL&to=USD&amount=123.45' \
   -H 'cache-control: no-cache' \
