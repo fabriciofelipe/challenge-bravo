@@ -92,23 +92,43 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 - Para os testes de performance utilizei a integração do framework gatling escrevendo em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
 - Atendeu mais de 1000mil requisições por segundo
 
-Global Information --------------------------------------------------------
-> request count                                      20000 (OK=20000  KO=0     )
-> min response time                                      0 (OK=0      KO=-     )
-> max response time                                    357 (OK=357    KO=-     )
-> mean response time                                    13 (OK=13     KO=-     )
-> std deviation                                         35 (OK=35     KO=-     )
-> response time 50th percentile                          3 (OK=3      KO=-     )
-> response time 75th percentile                          7 (OK=7      KO=-     )
-> response time 95th percentile                         76 (OK=76     KO=-     )
-> response time 99th percentile                        177 (OK=177    KO=-     )
-> mean requests/sec                                952.381 (OK=952.381 KO=-     )
----- Response Time Distribution ------------------------------------------------
-> t < 800 ms                                         20000 (100%)
-> 800 ms < t < 1200 ms                                   0 (  0%)
-> t > 1200 ms                                            0 (  0%)
-> failed                                                 0 (  0%)
-================================================================================
+- Global Information --------------------------------------------------------
+- > request count                                      20000 (OK=20000  KO=0     )
+- > min response time                                      0 (OK=0      KO=-     )
+- > max response time                                    357 (OK=357    KO=-     )
+- > mean response time                                    13 (OK=13     KO=-     )
+- > std deviation                                         35 (OK=35     KO=-     )
+- > response time 50th percentile                          3 (OK=3      KO=-     )
+- > response time 75th percentile                          7 (OK=7      KO=-     )
+- > response time 95th percentile                         76 (OK=76     KO=-     )
+- > response time 99th percentile                        177 (OK=177    KO=-     )
+- > mean requests/sec                                952.381 (OK=952.381 KO=-     )
+- ---- Response Time Distribution ------------------------------------------------
+- > t < 800 ms                                         20000 (100%)
+- > 800 ms < t < 1200 ms                                   0 (  0%)
+- > t > 1200 ms                                            0 (  0%)
+- > failed                                                 0 (  0%)
+- ================================================================================
+
+<p align="center">
+  <img src="src/main/resources/static/indicators.png" alt="Indicators" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/static/ActiveUsers&ResponseTime.png" alt="ActiveUsers & ResponseTime." />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/static/numberReqPerSec.png" alt="MumberReqPerSec" />
+</p>
+
+<p align="center">
+  <img src="src/main/resources/static/responseTime&NumberReq.png" alt="ResponseTime & NumberReq" />
+</p>
+
+
+
+
 
 
 ### backLog
