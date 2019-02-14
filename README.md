@@ -62,8 +62,8 @@ Boa sorte e boa viagem! ;)
 
 
 # Resposta ao Desafio Bravo
-Foi construída 1 API, respondesndo em JSON. A api foi feita em **java** com spring boot, openFeign no netflixOss para integraço com a api externa de cotação, spring chache e caffeine para gerenciamento do cache.
-Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que é capaz de buscar cotações atuais com lastro em USD entre diversas moedas e à partir de fontes sendo realizado um cache que é atualizado a cada 5s, podendo ser extendido. 
+Foi construída uma API, respondendo em JSON. A api foi feita em **java** com spring boot, openFeign no netflixOss para integração com a api externa de cotação, spring chache e caffeine para gerenciamento do cache.
+Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que é capaz de buscar cotações atuais com lastro em USD entre diversas moedas e à partir de fontes sendo realizado um cache que é atualizado a cada 60s, podendo ser extendido. 
 
 
 ## Fontes de cotação on-line
@@ -75,13 +75,13 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 </p>
 
 ### Worker:
-- é realizado um cache da api que retorn as cotações.
+- é realizado um cache da api que retorna as cotações.
 - Resposável por manter as cotações sempre atualizadas.
 - Permite diminuir o tempo de resposta da API já que não necessitará consultar a atualização na internet.
 
 
 ### API:
-- A api foi contruída em Java 9 já contenplando os recursos da programação funcional,Lombok para deixa o java menos verboso, spring boot 2, spring cacheble, caffeine para gerenciamento de cache,openFeign netflix oss, mockito e Junit para testes, maven como gerenciador de dependencias e Docker
+- A api foi contruída em Java 9 já contenplando os recursos da programação funcional,Lombok para deixar o java menos verboso, spring boot 2, spring cacheble, caffeine para gerenciamento de cache,openFeign netflix oss, mockito e Junit para testes, maven como gerenciador de dependencias e Docker
 - Responde aos requests http de converções dos usuários e processa as requisições entregando o resultado da cotação processada no formato **JSON**.
 
 
@@ -108,7 +108,7 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 
 
 ## TESTES de carga
-- Para os testes de performance utilizei a integração do framework gatling escrevendo em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
+- Para os testes de performance utilizei a integração do framework gatling escrevendo os testes em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
 - Atendeu mais de 1000mil requisições por segundo
 
 - Global Information --------------------------------------------------------
