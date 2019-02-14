@@ -87,6 +87,15 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 
 ## EXECUTANDO
 
+## Created jar file ####
+# mvn clean install
+
+## Create image ###
+#  docker build -f DockerFile -t challenge-bravo .
+
+## Run image ###
+# docker run -p 8080:8080 --name challenge-bravo  challenge-bravo
+
 
 ## TESTES de carga
 - Para os testes de performance utilizei a integração do framework gatling escrevendo em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
