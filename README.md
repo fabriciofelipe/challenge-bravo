@@ -87,14 +87,14 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 
 ## EXECUTANDO
 
-## Created jar file ####
-# mvn clean install
+### Created jar file 
+**mvn clean install**
 
-## Create image ###
-#  docker build -f DockerFile -t challenge-bravo .
+### Create image 
+**docker build -f DockerFile -t challenge-bravo .**
 
-## Run image ###
-# docker run -p 8080:8080 --name challenge-bravo  challenge-bravo
+### Run image 
+**docker run -p 8080:8080 --name challenge-bravo  challenge-bravo**
 
 
 ## TESTES de carga
