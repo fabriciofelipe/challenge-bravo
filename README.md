@@ -96,6 +96,17 @@ Como pode ser visto abaixo, para a arquitetura escolhida, é usado um worker que
 - Run image \
 **docker run -p 8080:8080 --name challenge-bravo  challenge-bravo**
 
+- Api Ex: \
+
+**http://localhost:8080/currencyConversion?from=BRL&to=USD&amount=123.45**
+- CURL \
+
+**curl -X GET \
+  'http://localhost:8080/currencyConversion?from=BRL&to=USD&amount=123.45' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 8b46775e-9b84-7ce6-46a0-0d87840cad56'**
+
+
 
 ## TESTES de carga
 - Para os testes de performance utilizei a integração do framework gatling escrevendo em scala, aqui meu projeto que utilizei nos testes https://github.com/fabriciofelipe/gatling-load-performance 
